@@ -1,1 +1,1 @@
-web: ./main
+web: employee-rest-api-demo
