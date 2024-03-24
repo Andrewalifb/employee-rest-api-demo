@@ -1,0 +1,142 @@
+openapi: 3.1.0
+info:
+  title: Employees API
+  description: API for retrieving information about employees
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local server
+paths:
+  /employees:
+    get:
+      summary: Get all employees
+      description: Returns a list of all employee objects
+      responses:
+        "200":
+          description: Success Get All Employees Data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Employees"
+        "500":
+          description: Internal Server Error
+          content: {}
+    post:
+      summary: Create a new employee
+      description: Creates a new employee object and returns it
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Employees"
+      responses:
+        "201":
+          description: Success Created New Employees Data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employees"
+        "500":
+          description: Internal Server Error
+          content: {}
+paths:
+  /employees/{id}:
+    get:
+      summary: Get an employee by ID
+      description: Returns a single employee object by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of the employee to retrieve
+      responses:
+        "200":
+          description: Success Get Employee Data By ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employees"
+        "404":
+          description: Employee not found
+          content: {}
+    put:
+      summary: Update an employee by ID
+      description: Updates an existing employee object by ID and returns it
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of the employee to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Employees"
+      responses:
+        "200":
+          description: Success Updated Employees Data by ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employees"
+        "500":
+          description: Internal Server Error
+          content: {}
+    delete:
+      summary: Delete an employee by ID
+      description: Deletes an existing employee object by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of the employee to delete
+      responses:
+        "200":
+          description: Success Deleted Employees Data by ID
+          content: {}
+        "500":
+          description: Internal Server Error
+          content: {}
+components:
+  schemas:
+    Employees:
+      type: object
+      required:
+        - ID
+        - Name
+        - Email
+        - Phone
+        - CreatedAt
+        - UpdatedAt
+      properties:
+        ID:
+          type: integer
+          format: int32
+          description: Unique identifier of the employee
+        Name:
+          type: string
+          description: Name of the employee
+        Email:
+          type: string
+          description: Email of the employee
+        Phone:
+          type: string
+          description: Phone of the employee
+        CreatedAt:
+          type: string
+          format: date-time
+          description: Timestamp of when the data was created
+        UpdatedAt:
+          type: string
+          format: date-time
+          description: Timestamp of when the data was last updated
