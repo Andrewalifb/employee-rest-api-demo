@@ -1,1 +1,1 @@
-web: ./employee-rest-api-demo.exe
+web: ./employee-rest-api-demo
