@@ -1,1 +1,1 @@
-web: go run .
+web: ./employee-rest-api-demo
