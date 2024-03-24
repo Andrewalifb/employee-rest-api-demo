@@ -16,6 +16,8 @@ func main() {
 
 	router := httprouter.New()
 
+	router.GET("/", func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+		fmt.Fprintln(w, "Hello World!")})
 	// Retrieve All Employees Data
 	router.GET("/employees", func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		handlers.GetAllEmployees(w, r)
